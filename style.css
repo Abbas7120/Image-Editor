@@ -21,6 +21,9 @@ main{
 main section{
     width: 100%;
     padding:var(--padding-2xl) ;
+    display: flex;
+    gap: var(--gutter-lg);
+
 
 }
 
@@ -55,6 +58,9 @@ main section .left{
 
 main section .right{
     width:30%;
+    background-color: var(--bg-secondary-color);
+    padding: var(--padding-lg);
+    border-radius: var(--border-radius-lg);
 }
 
 main section .top{
@@ -88,3 +94,43 @@ main section .bottom .placeholder{
 main section .bottom .placeholder i{
     font-size: 10rem;
 }
+
+main section .right{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter-md);
+}
+main section .right .filter{
+    width: 100%;
+}
+
+main section .right .filter input{
+    width:100%;
+    outline: none;
+    margin-top: var(--margin-sm);
+    appearance: none;
+}
+
+main section .right .filter input::-webkit-slider-runnable-track{
+    background-color: var(--bg-active-color);
+    height:3px;
+}
+
+main section .right .filter input::-moz-range-track{
+    background-color: var(--bg-active-color);
+    height:3px;
+    border-radius:2px;
+}
+
+
+main section .right .filter input::-webkit-slider-thumb{
+cursor: pointer;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background-color: red;
+margin: -8.5px;
+}
+
+
