@@ -1,3 +1,20 @@
+const canvas=document.querySelector("#image-canvas")
+const imageInput=document.querySelector("#image-input")
+const canvasCtx=canvas.getContext("2d")
+imageInput.addEventListener("change",(e)=>{
+//console.log("Change event fired")
+const imagePlaceholder=document.querySelector(".placeholder")
+const file=e.target.files[0]
+//console.log(file)
+const image=new Image()
+image.src=URL.createObjectURL(file)
+image.onload=()=>{
+    canvas.width=image.width
+    canvas.height=image.height
+    canvasCtx.drawImage(image,0,0)
+}
+imagePlaceholder.style.display="none"
+})
 const filters={
     Brightness:{
         value:100,
