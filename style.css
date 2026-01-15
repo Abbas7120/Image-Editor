@@ -141,7 +141,8 @@ margin: -8.5px;
 
 
 canvas{
-    background-color: aqua;
+    /* background-color: aqua; */
     max-height: 80vh;
     max-width: 100%;
+    display: none;
 }

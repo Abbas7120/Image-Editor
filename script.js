@@ -112,17 +112,23 @@ image.onload=()=>{
     canvas.height=image.height
     canvasCtx.drawImage(image,0,0)
 }
+canvas.style.display="block"
 imagePlaceholder.style.display="none"
 })
 
 function applyFilters(){
+    canvasCtx.clearRect(0,0,canvas.width,canvas.height)
     canvasCtx.filter=`
+     blur(${filters.Blur.value}${filters.Blur.unit})
+ grayscale(${filters.Grayscale.value}${filters.Grayscale.unit})
+ invert(${filters.Invert.value}${filters.Invert.unit})
     brightness(${filters.Brightness.value}${filters.Brightness.unit})
-  sepia(${filters.Sepia.value}${filters.Sepia.unit})
   opacity(${filters.Opacity.value}${filters.Opacity.unit})
 contrast(${filters.Contrast.value}${filters.Contrast.unit})
-   sepia(${filters.Sepia.value}${filters.Sepia.unit})`
-    
+   sepia(${filters.Sepia.value}${filters.Sepia.unit})
+   saturate(${filters.Saturation.value}${filters.Saturation.unit})
+   hue-rotate(${filters.hueRotation.value}${filters.hueRotation.unit})`
+
     canvasCtx.drawImage(img,0,0)
 }
 
