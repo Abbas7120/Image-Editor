@@ -70,7 +70,7 @@ main section .top{
 }
 
 main section .bottom{
-    background-color: blue;
+   
     width: 100%;
     padding: var(--padding-2xl) ;
     aspect-ratio: 5/3; /*bottom width and height calculate*/
@@ -142,6 +142,6 @@ margin: -8.5px;
 
 canvas{
     background-color: aqua;
-max-height: 80vh;
+    max-height: 80vh;
     max-width: 100%;
 }

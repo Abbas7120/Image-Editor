@@ -1,20 +1,8 @@
 const canvas=document.querySelector("#image-canvas")
 const imageInput=document.querySelector("#image-input")
 const canvasCtx=canvas.getContext("2d")
-imageInput.addEventListener("change",(e)=>{
-//console.log("Change event fired")
-const imagePlaceholder=document.querySelector(".placeholder")
-const file=e.target.files[0]
-//console.log(file)
-const image=new Image()
-image.src=URL.createObjectURL(file)
-image.onload=()=>{
-    canvas.width=image.width
-    canvas.height=image.height
-    canvasCtx.drawImage(image,0,0)
-}
-imagePlaceholder.style.display="none"
-})
+let file=null
+let img=null
 const filters={
     Brightness:{
         value:100,
@@ -28,12 +16,7 @@ Contrast:{
         max:200,
          unit:"%",
     },
-    Exposue:{
-        value:100,
-        min:0,
-        max:200,
-         unit:"%",
-    },
+   
     Saturation:{
         value:100,
         min:0,
@@ -97,7 +80,14 @@ p.innerText=name
 
 div.appendChild(p)
 div.appendChild(input)
-
+input.addEventListener("input",(event)=>{
+    //console.log(input.value)
+    // console.log(console.log(filters))
+//console.log(filters(name))
+filters[name].value=input.value;
+//console.log(name,filters[name])
+applyFilters()
+})
 return div
 }
 
@@ -108,3 +98,32 @@ const filterElement=createFilterElement(filter,filters[filter].unit,filters[filt
 console.log(filterElement)
 filterContainer.appendChild(filterElement)
 })
+
+imageInput.addEventListener("change",(e)=>{
+//console.log("Change event fired")
+const imagePlaceholder=document.querySelector(".placeholder")
+const file=e.target.files[0]
+//console.log(file)
+const image=new Image()
+image.src=URL.createObjectURL(file)
+image.onload=()=>{
+    img=image
+    canvas.width=image.width
+    canvas.height=image.height
+    canvasCtx.drawImage(image,0,0)
+}
+imagePlaceholder.style.display="none"
+})
+
+function applyFilters(){
+    canvasCtx.filter=`
+    brightness(${filters.Brightness.value}${filters.Brightness.unit})
+  sepia(${filters.Sepia.value}${filters.Sepia.unit})
+  opacity(${filters.Opacity.value}${filters.Opacity.unit})
+contrast(${filters.Contrast.value}${filters.Contrast.unit})
+   sepia(${filters.Sepia.value}${filters.Sepia.unit})`
+    
+    canvasCtx.drawImage(img,0,0)
+}
+
+
