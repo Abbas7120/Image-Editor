@@ -143,7 +143,7 @@ function applyFilters(){
 
 
 const resetButton=document.querySelector("#reset-btn")
-
+const downloadButton=document.querySelector("#download-btn")
 
 resetButton.addEventListener("click",()=>{
 filters={
@@ -209,3 +209,11 @@ filterContainer.innerHTML=""
 createFilters()
 })
 
+downloadButton.addEventListener("click",()=>{
+
+{/*<a href="path_to_file" download="proposed_file_name">Download</a>*/}
+const link=document.createElement("a")
+link.download="edited-image.png"
+link.href=canvas.toDataURL()
+link.click()
+})
