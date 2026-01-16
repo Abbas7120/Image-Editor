@@ -3,7 +3,9 @@ const imageInput=document.querySelector("#image-input")
 const canvasCtx=canvas.getContext("2d")
 let file=null
 let img=null
-const filters={
+
+
+let filters={
     Brightness:{
         value:100,
         min:0,
@@ -66,6 +68,8 @@ Contrast:{
                     <input type="range" min="0" max="200" name="brightness" value="100">
   <p>Brightness</p> */
 const filterContainer=document.querySelector(".filters")
+
+
 function createFilterElement(name,unit="%",value,min,max){
 const div=document.createElement("div")
 div.classList.add('filter')
@@ -91,6 +95,8 @@ applyFilters()
 return div
 }
 
+function createFilters(){
+
 Object.keys(filters).forEach(filter=>{
     
     //console.log(filter,filters[filter])
@@ -99,6 +105,9 @@ console.log(filterElement)
 filterContainer.appendChild(filterElement)
 })
 
+}
+
+createFilters()
 imageInput.addEventListener("change",(e)=>{
 //console.log("Change event fired")
 const imagePlaceholder=document.querySelector(".placeholder")
@@ -120,11 +129,11 @@ function applyFilters(){
     canvasCtx.clearRect(0,0,canvas.width,canvas.height)
     canvasCtx.filter=`
      blur(${filters.Blur.value}${filters.Blur.unit})
- grayscale(${filters.Grayscale.value}${filters.Grayscale.unit})
- invert(${filters.Invert.value}${filters.Invert.unit})
+     grayscale(${filters.Grayscale.value}${filters.Grayscale.unit})
+     invert(${filters.Invert.value}${filters.Invert.unit})
     brightness(${filters.Brightness.value}${filters.Brightness.unit})
-  opacity(${filters.Opacity.value}${filters.Opacity.unit})
-contrast(${filters.Contrast.value}${filters.Contrast.unit})
+    opacity(${filters.Opacity.value}${filters.Opacity.unit})
+    contrast(${filters.Contrast.value}${filters.Contrast.unit})
    sepia(${filters.Sepia.value}${filters.Sepia.unit})
    saturate(${filters.Saturation.value}${filters.Saturation.unit})
    hue-rotate(${filters.hueRotation.value}${filters.hueRotation.unit})`
@@ -132,4 +141,71 @@ contrast(${filters.Contrast.value}${filters.Contrast.unit})
     canvasCtx.drawImage(img,0,0)
 }
 
+
+const resetButton=document.querySelector("#reset-btn")
+
+
+resetButton.addEventListener("click",()=>{
+filters={
+    Brightness:{
+        value:100,
+        min:0,
+        max:200,
+        unit:"%",
+    },
+Contrast:{
+        value:100,
+        min:0,
+        max:200,
+         unit:"%",
+    },
+   
+    Saturation:{
+        value:100,
+        min:0,
+        max:200,
+         unit:"%",
+    },
+    hueRotation:{
+        value:0,
+        min:0,
+        max:300,
+         unit:"deg",
+    },
+    Blur:{
+        value:0,
+        min:0,
+        max:20,
+         unit:"px",
+    },
+    Grayscale:{
+        value:0,
+        min:0,
+        max:100,
+         unit:"%",
+    },
+    Sepia:{
+        value:0,
+        min:0,
+        max:100,
+         unit:"%",
+    },
+    Opacity:{
+        value:100,
+        min:0,
+        max:100,
+        unit:"%",
+    },
+    Invert:{
+        value:0,
+        min:0,
+        max:100,
+          unit:"%",
+    },
+}
+applyFilters()
+
+filterContainer.innerHTML=""
+createFilters()
+})
 
